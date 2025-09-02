@@ -1,0 +1,18 @@
+.stats {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #888;
+}
+
+.stats > div {
+    text-align: left;
+}
+
+.value {
+  display: inline-block;
+  width: 30px;
+  text-align: left;
+  color: #c7c7c7;
+  font-weight: 600;
+}

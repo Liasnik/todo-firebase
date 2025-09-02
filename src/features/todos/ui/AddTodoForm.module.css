@@ -1,0 +1,28 @@
+.controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #8f8f8f;
+}
+
+.input:focus,
+.input:focus-visible {
+  outline: 1px solid #646cff;
+  border-color: #646cff;
+}
+
+.addBtn {
+  padding: 10px 14px;
+  border: 1px solid #8f8f8f;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}

@@ -1,0 +1,60 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-bottom: 1px solid #555555;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.editInput {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #cfd4dc;
+}
+
+.editInput:focus,
+.editInput:focus-visible {
+  outline: 1px solid #646cff;
+  border-color: #646cff;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.button {
+  color: #a0a0a0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: #ffffff;
+}
+
+.dangerButton:hover {
+  color: red;
+}
+
+

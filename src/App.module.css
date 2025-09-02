@@ -1,0 +1,79 @@
+.page {
+  margin: 0 auto;
+  padding: 24px;
+  width: 100%;
+  max-width: 1160px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.title {
+  width: auto;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 6px;
+  }
+  .title {
+  display: none;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #5c5c5c;
+}
+
+.input:focus,
+.input:focus-visible {
+  outline: 1px solid #646cff;
+}
+
+.addBtn {
+  padding: 10px 14px;
+}
+
+.listContainer {
+  position: relative;
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.error {
+  color: #b00020;
+  margin-bottom: 8px;
+}
+
+

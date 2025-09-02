@@ -1,0 +1,17 @@
+export const LOAD_TODOS_REQUEST = 'todos/LOAD_TODOS_REQUEST';
+export const LOAD_TODOS_SUCCESS = 'todos/LOAD_TODOS_SUCCESS';
+export const LOAD_TODOS_FAILURE = 'todos/LOAD_TODOS_FAILURE';
+
+export const ADD_TODO_REQUEST = 'todos/ADD_TODO_REQUEST';
+export const ADD_TODO_SUCCESS = 'todos/ADD_TODO_SUCCESS';
+export const ADD_TODO_FAILURE = 'todos/ADD_TODO_FAILURE';
+
+
+export const EDIT_TODO_REQUEST = 'todos/EDIT_TODO_REQUEST';
+export const EDIT_TODO_SUCCESS = 'todos/EDIT_TODO_SUCCESS';
+export const EDIT_TODO_FAILURE = 'todos/EDIT_TODO_FAILURE';
+
+export const DELETE_TODO_REQUEST = 'todos/DELETE_TODO_REQUEST';
+export const DELETE_TODO_SUCCESS = 'todos/DELETE_TODO_SUCCESS';
+export const DELETE_TODO_FAILURE = 'todos/DELETE_TODO_FAILURE';
+
