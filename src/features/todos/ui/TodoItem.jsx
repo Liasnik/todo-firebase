@@ -1,31 +1,32 @@
-import { useState } from 'react';
+import { memo } from 'react';
 import { Pencil, Trash2, Check, X } from 'lucide-react';
 import styles from './TodoItem.module.css';
 
-export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(todo.text);
+function TodoItem({ todo, onToggle, onEdit, onDelete, editing }) {
+  const { isEditing, getDraft, startEditing, changeDraft, cancelEditing } = editing;
+  const editingActive = isEditing(todo.id);
+  const draftText = getDraft(todo.id);
+
+  const trimmedDraft = draftText.trim();
+  const canSave = trimmedDraft.length > 0;
 
   const save = () => {
-    if (text.trim() && text !== todo.text) {
-      onEdit(todo, { text });
+    if (canSave && trimmedDraft !== todo.text) {
+      onEdit(todo, { text: trimmedDraft });
     }
-    setIsEditing(false);
+    cancelEditing(todo.id);
   };
 
   const handleEditClick = () => {
-    if (isEditing) {
+    if (editingActive) {
       save();
     } else {
-      // Sync editor with the latest todo text before entering edit mode
-      setText(todo.text);
-      setIsEditing(true);
+      startEditing(todo.id, todo.text);
     }
   };
 
   const cancelEdit = () => {
-    setIsEditing(false);
-    setText(todo.text);
+    cancelEditing(todo.id);
   };
 
   return (
@@ -36,11 +37,11 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
         checked={todo.completed}
         onChange={() => onToggle(todo, { completed: !todo.completed })}
       />
-      {isEditing ? (
+      {editingActive ? (
         <input
           className={styles.editInput}
-          value={text}
-          onChange={e => setText(e.target.value)}
+          value={draftText}
+          onChange={e => changeDraft(todo.id, e.target.value)}
           onKeyDown={e => e.key === 'Enter' ? save() : (e.key === 'Escape' ? cancelEdit() : null)}
 
           autoFocus
@@ -51,10 +52,10 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
         </div>
       )}
       <div className={styles.buttons}>
-        {isEditing ? (
+        {editingActive ? (
           <>
             <button
-              disabled={!text.trim()}
+              disabled={!canSave}
               className={styles.button}
               aria-label="Зберегти"
               title="Зберегти"
@@ -95,5 +96,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }) {
     </div>
   );
 }
+
+export default memo(TodoItem);
 
 

@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeLeading } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { fetchTodos, addTodoApi, updateTodoApi, deleteTodoApi } from '../../api/todosApi';
 import {
   LOAD_TODOS_REQUEST,
@@ -55,7 +55,7 @@ function* deleteTodoWorker(action) {
 
 export function* todosSaga() {
   yield takeLatest(LOAD_TODOS_REQUEST, loadTodosWorker);
-  yield takeLeading(ADD_TODO_REQUEST, addTodoWorker);
-  yield takeLeading(EDIT_TODO_REQUEST, updateTodoWorker);
-  yield takeLeading(DELETE_TODO_REQUEST, deleteTodoWorker);
+  yield takeEvery(ADD_TODO_REQUEST, addTodoWorker);
+  yield takeEvery(EDIT_TODO_REQUEST, updateTodoWorker);
+  yield takeEvery(DELETE_TODO_REQUEST, deleteTodoWorker);
 }

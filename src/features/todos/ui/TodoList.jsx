@@ -2,7 +2,7 @@ import VirtualizedList from '../../../shared/ui/VirtualizedList/VirtualizedList.
 import { ITEM_HEIGHT } from '../model/config.js';
 import TodoItem from './TodoItem.jsx';
 
-export default function TodoList({ items, height, onToggle, onEdit, onDelete }) {
+export default function TodoList({ items, height, onToggle, onEdit, onDelete, editing }) {
   return (
     <VirtualizedList
       items={items}
@@ -14,6 +14,7 @@ export default function TodoList({ items, height, onToggle, onEdit, onDelete }) 
           onToggle={onToggle}
           onEdit={onEdit}
           onDelete={onDelete}
+          editing={editing}
         />
       )}
     />

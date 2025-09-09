@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadTodos, editTodo, deleteTodo } from '../../../store/actions/todosActions';
+import { loadTodos } from '../../../store/actions/todosActions';
 import { selectTodosItems, selectTodosLoading, selectTodosError } from '../model/selectors';
 import useListHeight from '../../../hooks/useListHeight';
 import { MIN_LIST_HEIGHT } from '../model/config.js';
+import useTodoEditingState from '../../../hooks/useTodoEditingState.js';
+import useTodoActions from '../../../hooks/useTodoActions.js';
 import TodoList from './TodoList.jsx';
 import AddTodoForm from './AddTodoForm.jsx';
 import styles from './TodoListContainer.module.css';
@@ -15,22 +17,15 @@ export default function TodoListContainer({ pageRef }) {
   const error = useSelector(selectTodosError);
   const listWrapRef = useRef(null);
   const listHeight = useListHeight(listWrapRef, pageRef, MIN_LIST_HEIGHT);
+  const editing = useTodoEditingState();
+  const itemsRef = useRef(items);
+  itemsRef.current = items;
+  const { onEdit, onToggle, onDelete } = useTodoActions(itemsRef);
 
   useEffect(() => {
     dispatch(loadTodos());
   }, [dispatch]);
-
-  const onEdit = useCallback((todo, patch) => {
-    dispatch(editTodo(todo, patch));
-  }, [dispatch]);
-
-  const onDelete = useCallback((id) => {
-    const index = items.findIndex(item => item.id === id);
-    if (index !== -1) {
-      dispatch(deleteTodo(items[index], index));
-    }
-  }, [dispatch, items]);
-
+ 
   return (
     <div className={styles.wrap}>
       <AddTodoForm />
@@ -40,9 +35,10 @@ export default function TodoListContainer({ pageRef }) {
         <TodoList
           items={items}
           height={listHeight}
-          onToggle={onEdit}
+          onToggle={onToggle}
           onEdit={onEdit}
           onDelete={onDelete}
+          editing={editing}
         />
       </div>
     </div>
