@@ -1,13 +1,18 @@
-import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './reducers';
+import todosReducer from '../features/todos/model/todosSlice';
 import rootSaga from './sagas';
 
-const composeEnhancers =
-  (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
+
+const store = configureStore({
+  reducer: {
+    todos: todosReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ thunk: false, serializableCheck: true }).concat(sagaMiddleware),
+  devTools: import.meta.env.DEV,
+});
 
 sagaMiddleware.run(rootSaga);
 
