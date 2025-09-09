@@ -1,8 +1,9 @@
 # To Do List з віртуалізацією
+[Демо](https://liasnik.github.io/todo-firebase/)
 
 ## Стек
 - React 19
-- Redux
+- Redux Toolkit
 - Redux-Saga
 - Vite
 - Firebase (Firestore)
@@ -33,13 +34,15 @@ npm run dev
 4. Відкрити у браузері посилання з консолі (зазвичай `http://localhost:5173`).
 
 ## Структура даних
-- Початкові 1000 елементів згенеровано у `src/data/todos.js`.
-- Запити до Firestore реалізовано у `src/api/todosApi.js`
+- Колекція Firestore `todos`: поля `text` (string), `completed` (boolean), `createdAt` (timestamp)
+- API-запити: `src/api/todosApi.js`
 
 ## Ключові частини
+- Стор: `src/store/store.js` (RTK `configureStore` + `redux-saga`).
+- Слайс: `src/features/todos/model/todosSlice.js`.
 - Саги: `src/store/sagas/todosSaga.js` + підключення `src/store/sagas/index.js`.
-- Редʼюсер: `src/store/reducers/todosReducer.js`.
-- Дії: `src/store/actions/todosActions.js`, типи: `src/store/types/todosTypes.js`.
+- Селектори: `src/features/todos/model/selectors.js`.
+- Хуки дій: `src/hooks/useTodoActions.js`.
 - Віртуалізація: `src/shared/ui/VirtualizedList/VirtualizedList.jsx`.
 - Елементи списку: `src/features/todos/ui/TodoItem.jsx`.
 - Головний екран: `src/App.jsx`.

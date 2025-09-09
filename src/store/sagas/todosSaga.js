@@ -1,17 +1,19 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { fetchTodos, addTodoApi, updateTodoApi, deleteTodoApi } from '../../api/todosApi';
 import {
-  LOAD_TODOS_REQUEST,
-  ADD_TODO_REQUEST,
-  EDIT_TODO_REQUEST,
-  DELETE_TODO_REQUEST
-} from '../types/todosTypes';
-import { 
-  addTodoSuccess, addTodoFailure, 
-  editTodoSuccess, editTodoFailure,
-  deleteTodoSuccess, deleteTodoFailure,
-  loadTodosSuccess, loadTodosFailure
-} from '../actions/todosActions';
+  loadTodosRequest,
+  loadTodosSuccess,
+  loadTodosFailure,
+  addTodoRequest,
+  addTodoSuccess,
+  addTodoFailure,
+  editTodoRequest,
+  editTodoSuccess,
+  editTodoFailure,
+  deleteTodoRequest,
+  deleteTodoSuccess,
+  deleteTodoFailure,
+} from '../../features/todos/model/todosSlice';
 
 function* loadTodosWorker() {
   try {
@@ -54,8 +56,8 @@ function* deleteTodoWorker(action) {
 }
 
 export function* todosSaga() {
-  yield takeLatest(LOAD_TODOS_REQUEST, loadTodosWorker);
-  yield takeEvery(ADD_TODO_REQUEST, addTodoWorker);
-  yield takeEvery(EDIT_TODO_REQUEST, updateTodoWorker);
-  yield takeEvery(DELETE_TODO_REQUEST, deleteTodoWorker);
+  yield takeLatest(loadTodosRequest.type, loadTodosWorker);
+  yield takeEvery(addTodoRequest.type, addTodoWorker);
+  yield takeEvery(editTodoRequest.type, updateTodoWorker);
+  yield takeEvery(deleteTodoRequest.type, deleteTodoWorker);
 }

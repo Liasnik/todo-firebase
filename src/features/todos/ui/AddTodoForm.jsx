@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { addTodo } from '../../../store/actions/todosActions';
+import { addTodoRequest } from '../../todos/model/todosSlice';
 import styles from './AddTodoForm.module.css';
 
 export default function AddTodoForm() {
@@ -11,7 +11,7 @@ export default function AddTodoForm() {
   const onAdd = useCallback(() => {
     const text = newText.trim();
     if (!text) return;
-    dispatch(addTodo(text, nanoid()));
+    dispatch(addTodoRequest({ text, id: nanoid() }));
     setNewText('');
   }, [dispatch, newText]);
 

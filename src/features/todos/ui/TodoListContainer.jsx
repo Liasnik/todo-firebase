@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadTodos } from '../../../store/actions/todosActions';
+import { loadTodosRequest } from '../../todos/model/todosSlice';
 import { selectTodosItems, selectTodosLoading, selectTodosError } from '../model/selectors';
 import useListHeight from '../../../hooks/useListHeight';
 import { MIN_LIST_HEIGHT } from '../model/config.js';
@@ -23,7 +23,7 @@ export default function TodoListContainer({ pageRef }) {
   const { onEdit, onToggle, onDelete } = useTodoActions(itemsRef);
 
   useEffect(() => {
-    dispatch(loadTodos());
+    dispatch(loadTodosRequest());
   }, [dispatch]);
  
   return (
