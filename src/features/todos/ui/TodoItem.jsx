@@ -2,11 +2,17 @@ import { memo } from 'react';
 import { Pencil, Trash2, Check, X } from 'lucide-react';
 import styles from './TodoItem.module.css';
 
-function TodoItem({ todo, onToggle, onEdit, onDelete, editing }) {
-  const { isEditing, getDraft, startEditing, changeDraft, cancelEditing } = editing;
-  const editingActive = isEditing(todo.id);
-  const draftText = getDraft(todo.id);
-
+function TodoItem({ 
+  todo, 
+  onToggle, 
+  onEdit, 
+  onDelete, 
+  editingActive, 
+  draftText,
+  startEditing, 
+  changeDraft, 
+  cancelEditing 
+  }) {
   const trimmedDraft = draftText.trim();
   const canSave = trimmedDraft.length > 0;
 
